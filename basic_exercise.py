@@ -86,6 +86,21 @@ class BrokenDelivery(DeliveryMethod):
 broken1 = BrokenDelivery()
 print(broken1.deliver(101)) # TypeError: Can't instantiate abstract class BrokenDelivery without an implementation for abstract method 'deliver'
 
+# 6. Static Delivery Fee Calculator
+class DeliveryFee:
+    @staticmethod
+    def calculate(distance_km, rate_per_km):
+        return distance_km * rate_per_km
+    @staticmethod
+    def with_surcharge(base_fee, surcharge_percent):
+        return base_fee *(1+surcharge_percent/100)
+    @staticmethod
+    def is_free(distance_km):
+        return True if distance_km<=2.0 else False
+print(DeliveryFee.calculate(5,3.0))
+print(DeliveryFee.with_surcharge(15.0,10))    
+print(DeliveryFee.is_free(1.5))    
+
 
     
 
