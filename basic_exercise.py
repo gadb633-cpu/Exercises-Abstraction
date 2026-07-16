@@ -7,8 +7,8 @@ class DeliveryMethod(ABC):
 class BikeDelivery(DeliveryMethod):
     def deliver(self,order_id):
         return f"Order {order_id} delivered by bike."
-bike1 = BikeDelivery()
-print(bike1.deliver(101)) 
+SkyEx = BikeDelivery()
+print(SkyEx.deliver(101)) 
 
 # 2. Two Delivery Types
 class DeliveryMethod(ABC):
@@ -21,12 +21,32 @@ class DroneDelivery(DeliveryMethod):
 class CarDelivery(DeliveryMethod):
     def deliver(self,order_id):
         return f"Order {order_id} brought to your building by car."
-drone1 = DroneDelivery()
-print(drone1.deliver(202))
+SpeedRiders = DroneDelivery()
+print(SpeedRiders.deliver(202))
 car1 = CarDelivery()
 print(car1.deliver(202))
 
-        
+# 3. Abstract with Constructor
+class DeliveryMethod(ABC):
+    def __init__(self,company_name):
+        self.company_name =company_name
+    @abstractmethod
+    def deliver(self,order_id):
+        pass
+class BikeDelivery(DeliveryMethod):
+    def __init__(self, company_name):
+        super().__init__(company_name)
+    def deliver(self,order_id):
+        return f"[{self.company_name}] Order {order_id} — bike delivery."
+class DroneDelivery(DeliveryMethod):
+    def __init__(self, company_name):
+        super().__init__(company_name)    
+    def deliver(self,order_id):
+        return f"[{self.company_name}] Order {order_id} — drone delivery."    
+SkyEx = DroneDelivery("SkyEx")
+SpeedRiders = BikeDelivery("SpeedRiders")
+print(SkyEx.deliver(303))
+print(SpeedRiders.deliver(303))
         
 
 
