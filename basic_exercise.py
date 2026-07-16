@@ -74,6 +74,19 @@ print(SpeedRiders.deliver(1))
 print(SkyEx.get_eta())
 print(SpeedRiders.get_eta())
 
+# 5. Missing Implementation Error
+class DeliveryMethod(ABC):
+    @abstractmethod
+    def deliver(self,order_id):
+        pass
+class BrokenDelivery(DeliveryMethod):
+    def deliver(self,order_id):
+        return f"Order {order_id} — broken delivery."
+            
+broken1 = BrokenDelivery()
+print(broken1.deliver(101)) # TypeError: Can't instantiate abstract class BrokenDelivery without an implementation for abstract method 'deliver'
+
+
     
 
 
