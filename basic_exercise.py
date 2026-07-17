@@ -153,8 +153,36 @@ InApp_No = InAppNotifier()
 list_instances = [push_no,WhatsApp_No,InApp_No]
 for instance in list_instances:
     print(instance.send("customer_42","Your order is on the way!"))
-    
 
+# 8. Notification Abstract Class
+class Restaurant(ABC):
+    @abstractmethod
+    def get_menu(self):
+        self.list1 = []
+        return self.list1
+    @abstractmethod
+    def prepare_order(self,item_name):
+        pass
+class ItalianRestaurant(Restaurant):
+    def get_menu(self):
+        self.menu = ['pasta', 'pizza', 'tiramisu']
+        return self.menu
+    def prepare_order(self,item_name):
+        return f"{item_name} its make"
+class SushiRestaurant(Restaurant):
+    def get_menu(self):
+        self.menu = ['maki', 'nigiri', 'ramen']
+        return self.menu
+    def prepare_order(self,item_name):
+        return f"{item_name} its make with chopstics"
+pizza = ItalianRestaurant()
+sushi = SushiRestaurant()
+list_restaurant = [pizza,sushi]
+for restaurant in list_restaurant:
+    print(restaurant.get_menu())
+    print(restaurant.prepare_order("chips"))
+
+    
 
 
 
