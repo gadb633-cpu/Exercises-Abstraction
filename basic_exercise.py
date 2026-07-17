@@ -99,7 +99,46 @@ class DeliveryFee:
         return True if distance_km<=2.0 else False
 print(DeliveryFee.calculate(5,3.0))
 print(DeliveryFee.with_surcharge(15.0,10))    
-print(DeliveryFee.is_free(1.5))    
+print(DeliveryFee.is_free(1.5)) 
+
+# 7. Abstract + Static Togetherד
+class DeliveryMethod(ABC):
+    @abstractmethod
+    def deliver(self,order_id):
+        pass
+    @abstractmethod
+    def get_eta(self):
+        pass
+class WalkingDelivery(DeliveryMethod):
+    def deliver(self,order_id):
+        return f"Order {order_id} — walking delivery."
+
+    def get_eta(self):
+        self.slow_ETA = 60   
+        return self.slow_ETA
+class ExpressDelivery(DeliveryMethod):
+    def deliver(self,order_id):
+        return f"Order {order_id} — experss delivery."
+    def get_eta(self):
+        self.fast_ETA = 10  
+        return self.fast_ETA
+class DeliveryHelper(DeliveryMethod):
+    @staticmethod
+    def faster(d1, d2):
+        if d1.get_eta() > d2.get_eta():
+            return f"Faster option: {d2.__class__.__name__}"
+        else:
+            return f"Faster option: {d1.__class__.__name__}"
+            
+            
+d1 = WalkingDelivery()
+d2 = ExpressDelivery()
+print(DeliveryHelper.faster(d1,d2))
+
+
+
+
+
 
 
     
