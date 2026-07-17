@@ -128,12 +128,34 @@ class DeliveryHelper(DeliveryMethod):
         if d1.get_eta() > d2.get_eta():
             return f"Faster option: {d2.__class__.__name__}"
         else:
-            return f"Faster option: {d1.__class__.__name__}"
-            
-            
+            return f"Faster option: {d1.__class__.__name__}"            
 d1 = WalkingDelivery()
 d2 = ExpressDelivery()
 print(DeliveryHelper.faster(d1,d2))
+
+# 8. Notification Abstract Class
+class Notifier(ABC):
+    @abstractmethod
+    def send(self,recipient, message):
+        pass
+class PushNotifier(Notifier):
+    def send(self,recipient, message):
+        return f"Push to {recipient}: {message}"
+class WhatsAppNotifier(Notifier):
+    def send(self,recipient, message):
+        return f"WhatsApp to {recipient}: {message}"
+class InAppNotifier(Notifier):
+    def send(self,recipient, message):
+        return f"In-app banner for {recipient}: {message}"
+push_no = PushNotifier()
+WhatsApp_No = WhatsAppNotifier()
+InApp_No = InAppNotifier()
+list_instances = [push_no,WhatsApp_No,InApp_No]
+for instance in list_instances:
+    print(instance.send("customer_42","Your order is on the way!"))
+    
+
+
 
 
 
