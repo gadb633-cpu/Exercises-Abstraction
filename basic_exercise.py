@@ -182,8 +182,57 @@ for restaurant in list_restaurant:
     print(restaurant.get_menu())
     print(restaurant.prepare_order("chips"))
 
-    
+# 10. Full Delivery Platform
+class DeliveryMethod(ABC):
+    @abstractmethod
+    def deliver(self,order_id):
+        pass
+    @abstractmethod
+    def get_eta(self):
+        pass
+    @abstractmethod
+    def get_cost(self,distance_km):
+        pass
+class BikeDelivery(DeliveryMethod):
+    def deliver(self,order_id):
+        return order_id
+    def get_eta(self):
+        self.ETA = 60
+        return self.ETA
 
+    def get_cost(self,distance_km):
+        self.distance = distance_km
+        return self.distance
+
+class DroneDelivery(DeliveryMethod):
+    def deliver(self,order_id):
+        return order_id
+        
+    def get_eta(self):
+        self.ETA = 40
+        return self.ETA
+    def get_cost(self,distance_km):
+        self.distance = distance_km
+        return self.distance
+bike1 = BikeDelivery()
+drone1 = DroneDelivery()
+class Platform():
+    list_delivory = [bike1,drone1]
+    def cheapest_option(self,distance_km):
+        self.item = self.list_delivory[0].get_cost(distance_km)
+        for self.delivory in self.list_delivory:
+            if self.delivory.get_cost(distance_km) > self.item:
+                self.item = self.delivory.__class__.__name__
+        return self.item        
+    def fastest_option(self):
+        self.item_fastest = self.list_delivory[0].get_eta()
+        for self.delivory in self.list_delivory:
+            if self.delivory.get_eta() < self.item_fastest:
+                self.item_fastest = self.delivory
+        return self.item_fastest.__class__.__name__
+p = Platform()
+print(p.cheapest_option(5.0))
+print(p.fastest_option()) 
 
 
 
