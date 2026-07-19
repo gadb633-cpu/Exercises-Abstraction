@@ -127,3 +127,36 @@ exp2 = create_exporter("csv")
 print(exp2.export())
 exp3 = create_exporter("json")
 print(exp3.export())
+# 5. Game Enemy Factory
+class Enemy(ABC):
+    @abstractmethod
+    def get_attack_message(self):
+        pass
+
+class Goblin(Enemy):
+    def get_attack_message(self):
+        return "Goblin attacks with a rusty dagger!"
+
+class Dragon(Enemy):
+    def get_attack_message(self):
+        return "Dragon breathes a blast of fire!"
+
+class Robot(Enemy):
+    def get_attack_message(self):
+        return "Robot fires a laser beam!"
+
+def create_enemy(enemy_type):
+    if enemy_type == "goblin":
+        return Goblin()
+    elif enemy_type == "dragon":
+        return Dragon()
+    elif enemy_type == "robot":
+        return Robot()
+    return 
+
+enemy1 = create_enemy("goblin")
+enemy2 = create_enemy("dragon")
+enemy3 = create_enemy("robot")
+print(enemy1.get_attack_message())
+print(enemy2.get_attack_message())
+print(enemy3.get_attack_message())
