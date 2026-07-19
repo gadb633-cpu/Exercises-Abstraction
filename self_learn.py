@@ -58,4 +58,38 @@ print(animal1.get_sound())
 animal2 = create_animal("cat")
 print(animal2.get_sound())  
 animal3 = create_animal("bird")
-print(animal3.get_sound())  
+print(animal3.get_sound())
+
+# 3. Transport Factory
+class Transport(ABC):
+    @abstractmethod
+    def deliver(self):
+        pass
+
+class Truck(Transport):
+    def deliver(self):
+        return "Delivering by land in a truck."
+
+class Ship(Transport):
+    def deliver(self):
+        return "Delivering by sea in a cargo ship."
+
+class Plane(Transport):
+    def deliver(self):
+        return "Delivering by air in an airplane."
+
+def create_transport(transport_type):
+    if transport_type == "truck":
+        return Truck()
+    elif transport_type == "ship":
+        return Ship()
+    elif transport_type == "plane":
+        return Plane()
+    return 
+
+t1 = create_transport("truck")
+t2 = create_transport("ship")
+t3 = create_transport("plane")
+print(t1.deliver())
+print(t2.deliver())
+print(t3.deliver())
