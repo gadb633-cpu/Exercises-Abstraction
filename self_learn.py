@@ -93,3 +93,37 @@ t3 = create_transport("plane")
 print(t1.deliver())
 print(t2.deliver())
 print(t3.deliver())
+
+#4. Report Exporter
+class ReportExporter(ABC):
+    @abstractmethod
+    def export(self):
+        pass
+
+class PDFExporter(ReportExporter):
+    def export(self):
+        return "Exporting report as PDF"
+
+class CSVExporter(ReportExporter):
+    def export(self):
+        return "Exporting report as CSV"
+
+class JSONExporter(ReportExporter):
+    def export(self):
+        return "Exporting report as JSON"
+
+def create_exporter(export_type):
+    if export_type == "pdf":
+        return PDFExporter()
+    elif export_type == "csv":
+        return CSVExporter()
+    elif export_type == "json":
+        return JSONExporter()
+    return 
+
+exp1 = create_exporter("pdf")
+print(exp1.export())
+exp2 = create_exporter("csv")
+print(exp2.export())
+exp3 = create_exporter("json")
+print(exp3.export())
